@@ -1,0 +1,35 @@
+.filter {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .filter-button {
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    background-color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .filter-button.active, .filter-button:hover {
+    background-color: #ddd;
+  }
+  
+  .image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  
+  .image-item {
+    border: 1px solid #ddd;
+    padding: 5px;
+  }
+  
+  .image-item img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  
