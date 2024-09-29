@@ -2,119 +2,98 @@ import React, { Component } from 'react';
 
 const images = [
   {
-    img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/mon.jpg",
-    category: "Business Cards"
-  }, 
-  {
-    img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/200.jpg",
-    category: "Websites"
-  }, 
-  {
-    img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/emi_haze.jpg",
-    category: "Websites"
-  }, 
-  {
-    img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/codystretch.jpg",
-    category: "Websites"
-  }, 
-  {
-    img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/Triangle_003.jpg",
-    category: "Business Cards"
+    name: "Nike Metcon 2",
+    price: "130",
+    color: "red",
+    img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/layouts/img/1.jpg"
   },
   {
-    img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/place200x290.png",
-    category: "Websites"
-  }, 
+    name: "Nike Metcon 2",
+    price: "130",
+    color: "green",
+    img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/layouts/img/2.jpg"
+  },
   {
-    img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/200.jpg",
-    category: "Websites"
-  }, 
+    name: "Nike Metcon 2",
+    price: "130",
+    color: "blue",
+    img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/layouts/img/3.jpg"
+  },
   {
-    img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/transmission.jpg",
-    category: "Business Cards"
-  }, 
+    name: "Nike Metcon 2",
+    price: "130",
+    color: "black",
+    img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/layouts/img/4.jpg"
+  },
   {
-    img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/place200x290_1.png",
-    category: "Websites"
-  }, 
+    name: "Nike free run",
+    price: "170",
+    color: "black",
+    img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/layouts/img/7.jpg"
+  },
   {
-    img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/place200x290_2.png",
-    category: "Flayers"
-  }, 
-  {
-    img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/the_ninetys_brand.jpg",
-    category: "Websites"
-  }, 
-  {
-    img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/dia.jpg",
-    category: "Business Cards"
-  }, 
-  {
-    img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/Triangle_350x197.jpg",
-    category: "Websites"
-  }, 
-  {
-    img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/emi_haze.jpg",
-    category: "Websites"
-  }, 
-  {
-    img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/transmission.jpg",
-    category: "Business Cards"
-  }, 
-  {
-    img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/Triangle_350x197_1.jpg",
-    category: "Websites"
-  }, 
-  {
-    img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/place200x290_3.png",
-    category: "Flayers"
+    name: "Nike Metcon 3",
+    price: "150",
+    color: "green",
+    img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/layouts/img/5.jpg"
   }
 ];
-
-const categories = ["All", "Websites", "Flayers", "Business Cards"];
 
 class Portfolio extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedCategory: 'All'
+      view: 'grid' // Состояние для вида отображения (сетка по умолчанию)
     };
   }
 
-  handleCategoryChange = (category) => {
-    this.setState({ selectedCategory: category });
+  toggleView = () => {
+    this.setState({ view: this.state.view === 'grid' ? 'list' : 'grid' });
   };
 
   render() {
-    const { selectedCategory } = this.state;
-
-    const filteredImages = selectedCategory === "All"
-      ? images
-      : images.filter(image => image.category === selectedCategory);
-
+    const { view } = this.state;
     return (
       <div>
-        {/* Фильтр категорий */}
-        <div className="filter">
-          {categories.map((category) => (
-            <button
-              key={category}
-              className={`filter-button ${selectedCategory === category ? "active" : ""}`}
-              onClick={() => this.handleCategoryChange(category)}
-            >
-              {category}
-            </button>
-          ))}
-        </div>  
+        <button onClick={this.toggleView}>
+          {view === 'grid' ? 'List View' : 'Grid View'}
+        </button>
 
-        {/* Галерея изображений */}
-        <div className="image-gallery">
-          {filteredImages.map((image, index) => (
-            <div key={index} className="image-item">
-              <img src={image.img} alt={image.category} />
+        {view === 'grid' ? (
+          <div className="grid-view">
+            {/* Отображение в виде сетки */}
+            <div className="image-gallery">
+              {images.map((image, index) => (
+                <div key={index} className="image-item">
+                  <img src={image.img} alt={image.name} />
+                  <div className="image-info">
+                    <p><strong>{image.name}</strong></p>
+                    <p>{image.color}</p>
+                    <p>${image.price}</p>
+                    <button>Add to Cart</button>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        ) : (
+          <div className="list-view">
+            {/* Отображение в виде списка */}
+            <ul className="image-list">
+              {images.map((image, index) => (
+                <li key={index} className="list-item">
+                  <img src={image.img} alt={image.name} />
+                  <div className="list-info">
+                    <p><strong>{image.name}</strong></p>
+                    <p>{image.color}</p>
+                    <p>${image.price}</p>
+                    <button>Add to Cart</button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     );
   }
